@@ -15,11 +15,6 @@ KU::PLUGIN::PluginVersion KU_BluetoothMusic_Plugin::version() const
     return { 1, 0, 0 };
 }
 
-QSet<KU::PLUGIN::PluginInfo> KU_BluetoothMusic_Plugin::dependencies() const
-{
-    return QSet<KU::PLUGIN::PluginInfo>();
-}
-
 QString KU_BluetoothMusic_Plugin::license() const
 {
     return "LGPL";
@@ -30,13 +25,13 @@ QIcon KU_BluetoothMusic_Plugin::icon() const
     return QIcon();
 }
 
-bool KU_BluetoothMusic_Plugin::initialize(const QSet<KU::PLUGIN::PluginInterface*>& plugins)
+bool KU_BluetoothMusic_Plugin::initialize()
 {
     if(QFontDatabase::addApplicationFont(":/FontAwesome") < 0)
         qWarning() << "FontAwesome cannot be loaded !";
 
     qDebug() << this->name() << "initialize";
-    for(auto& p : plugins)
+    /*for(auto& p : plugins)
     {
         qDebug() << p->name();
         auto bluetoothPlugin = dynamic_cast<KU::PLUGIN::BluetoothPluginInterface*>(p);
@@ -65,7 +60,7 @@ bool KU_BluetoothMusic_Plugin::initialize(const QSet<KU::PLUGIN::PluginInterface
             QObject::connect(this->musicControllerWidget, &MusicController::mediaPause,
                              this->bluetoothPlugin->getBluetoothConnector(), &KU::PLUGIN::BluetoothConnector::mediaPause);
         }
-    }
+    }*/
     return true;
 }
 
