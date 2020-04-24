@@ -30,37 +30,31 @@ bool KU_BluetoothMusic_Plugin::initialize()
     if(QFontDatabase::addApplicationFont(":/FontAwesome") < 0)
         qWarning() << "FontAwesome cannot be loaded !";
 
-    qDebug() << this->name() << "initialize";
-    /*for(auto& p : plugins)
-    {
-        qDebug() << p->name();
-        auto bluetoothPlugin = dynamic_cast<KU::PLUGIN::BluetoothPluginInterface*>(p);
-        if(bluetoothPlugin != nullptr)
-        {
-            this->bluetoothPlugin = bluetoothPlugin;
-            QObject::connect(this->bluetoothPlugin->getBluetoothConnector(), &KU::PLUGIN::BluetoothConnector::trackChanged,
-                             this->musicControllerWidget, &MusicController::trackChanged);
-            QObject::connect(this->bluetoothPlugin->getBluetoothConnector(), &KU::PLUGIN::BluetoothConnector::nameChanged,
-                             this->musicControllerWidget, &MusicController::nameChanged);
-            QObject::connect(this->bluetoothPlugin->getBluetoothConnector(), &KU::PLUGIN::BluetoothConnector::positionChanged,
-                             this->musicControllerWidget, &MusicController::positionChanged);
-            QObject::connect(this->bluetoothPlugin->getBluetoothConnector(), &KU::PLUGIN::BluetoothConnector::repeatChanged,
-                             this->musicControllerWidget, &MusicController::repeatChanged);
-            QObject::connect(this->bluetoothPlugin->getBluetoothConnector(), &KU::PLUGIN::BluetoothConnector::shuffleChanged,
-                             this->musicControllerWidget, &MusicController::shuffleChanged);
-            QObject::connect(this->bluetoothPlugin->getBluetoothConnector(), &KU::PLUGIN::BluetoothConnector::statusChanged,
-                             this->musicControllerWidget, &MusicController::statusChanged);
+    this->musicControllerWidget = new MusicController;
 
-            QObject::connect(this->musicControllerWidget, &MusicController::mediaPrevious,
-                             this->bluetoothPlugin->getBluetoothConnector(), &KU::PLUGIN::BluetoothConnector::mediaPrevious);
-            QObject::connect(this->musicControllerWidget, &MusicController::mediaNext,
-                             this->bluetoothPlugin->getBluetoothConnector(), &KU::PLUGIN::BluetoothConnector::mediaNext);
-            QObject::connect(this->musicControllerWidget, &MusicController::mediaPlay,
-                             this->bluetoothPlugin->getBluetoothConnector(), &KU::PLUGIN::BluetoothConnector::mediaPlay);
-            QObject::connect(this->musicControllerWidget, &MusicController::mediaPause,
-                             this->bluetoothPlugin->getBluetoothConnector(), &KU::PLUGIN::BluetoothConnector::mediaPause);
-        }
-    }*/
+    this->pluginConnector = new KU_BluetoothMusic_PluginConnector;
+    this->setPluginConnector(this->pluginConnector);
+
+    QObject::connect(this->pluginConnector, &KU_BluetoothMusic_PluginConnector::trackChanged,
+                     this->musicControllerWidget, &MusicController::changeTrack);
+    QObject::connect(this->pluginConnector, &KU_BluetoothMusic_PluginConnector::nameChanged,
+                     this->musicControllerWidget, &MusicController::changeName);
+    QObject::connect(this->pluginConnector, &KU_BluetoothMusic_PluginConnector::positionChanged,
+                     this->musicControllerWidget, &MusicController::changePosition);
+    QObject::connect(this->pluginConnector, &KU_BluetoothMusic_PluginConnector::repeatChanged,
+                     this->musicControllerWidget, &MusicController::changeRepeat);
+    QObject::connect(this->pluginConnector, &KU_BluetoothMusic_PluginConnector::shuffleChanged,
+                     this->musicControllerWidget, &MusicController::changeShuffle);
+    QObject::connect(this->pluginConnector, &KU_BluetoothMusic_PluginConnector::statusChanged,
+                     this->musicControllerWidget, &MusicController::changeStatus);
+    QObject::connect(this->musicControllerWidget, &MusicController::mediaPreviousSignal,
+                     this->pluginConnector, &KU_BluetoothMusic_PluginConnector::mediaPreviousSlot);
+    QObject::connect(this->musicControllerWidget, &MusicController::mediaNextSignal,
+                     this->pluginConnector, &KU_BluetoothMusic_PluginConnector::mediaNextSlot);
+    QObject::connect(this->musicControllerWidget, &MusicController::mediaPlaySignal,
+                     this->pluginConnector, &KU_BluetoothMusic_PluginConnector::mediaPlaySlot);
+    QObject::connect(this->musicControllerWidget, &MusicController::mediaPauseSignal,
+                     this->pluginConnector, &KU_BluetoothMusic_PluginConnector::mediaPauseSlot);
     return true;
 }
 
@@ -71,7 +65,6 @@ bool KU_BluetoothMusic_Plugin::stop()
 
 QWidget* KU_BluetoothMusic_Plugin::createWidget()
 {
-    this->musicControllerWidget = new MusicController;
     return this->musicControllerWidget;
 }
 

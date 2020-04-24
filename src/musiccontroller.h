@@ -6,13 +6,13 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QSlider>
-#include "bluetoothinterface.h"
+#include "mediadefines.h"
 
 class MusicController : public QWidget
 {
     Q_OBJECT
 private:
-    KU::PLUGIN::MediaStatus status = KU::PLUGIN::MediaStatus::Error;
+    MediaStatus status = MediaStatus::Error;
     QLabel* trackLabel;
     QPushButton* prevBtn;
     QPushButton* nextBtn;
@@ -22,18 +22,18 @@ private:
 public:
     MusicController(QWidget* parent = nullptr);
 
-    void trackChanged(KU::PLUGIN::MediaTrack const& track);
-    void nameChanged(QString const& name);
-    void positionChanged(quint32 position);
-    void repeatChanged(KU::PLUGIN::MediaRepeat repeat);
-    void shuffleChanged(KU::PLUGIN::MediaShuffle shuffle);
-    void statusChanged(KU::PLUGIN::MediaStatus status);
+    void changeTrack(MediaTrack const& track);
+    void changeName(QString const& name);
+    void changePosition(quint32 position);
+    void changeRepeat(MediaRepeat repeat);
+    void changeShuffle(MediaShuffle shuffle);
+    void changeStatus(MediaStatus status);
 
 signals:
-    void mediaPrevious();
-    void mediaNext();
-    void mediaPlay();
-    void mediaPause();
+    void mediaPreviousSignal();
+    void mediaNextSignal();
+    void mediaPlaySignal();
+    void mediaPauseSignal();
 };
 
 #endif // MUSICCONTROLLER_H

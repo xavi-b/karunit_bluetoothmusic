@@ -1,5 +1,5 @@
-#ifndef TESTPLUGIN_H
-#define TESTPLUGIN_H
+#ifndef BLUETOOTHMUSICPLUGIN_H
+#define BLUETOOTHMUSICPLUGIN_H
 
 #include <QtPlugin>
 #include <QIcon>
@@ -8,9 +8,9 @@
 #include <QDateTime>
 #include <QFontDatabase>
 #include "plugininterface.h"
-#include "bluetoothinterface.h"
 #include "settings.h"
 #include "musiccontroller.h"
+#include "bluetoothmusicconnector.h"
 
 class KU_BluetoothMusic_Plugin : public QObject, public KU::PLUGIN::PluginInterface
 {
@@ -34,8 +34,8 @@ public:
 
 private:
     MusicController* musicControllerWidget = nullptr;
-    KU::PLUGIN::BluetoothPluginInterface* bluetoothPlugin = nullptr;
+    KU_BluetoothMusic_PluginConnector* pluginConnector = nullptr;
 };
 
 
-#endif // TESTPLUGIN_H
+#endif // BLUETOOTHMUSICPLUGIN_H

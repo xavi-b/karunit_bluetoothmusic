@@ -33,27 +33,27 @@ MusicController::MusicController(QWidget* parent)
 
     this->setLayout(layout);
 
-    connect(this->prevBtn, &QPushButton::clicked, this, &MusicController::mediaPrevious);
-    connect(this->nextBtn, &QPushButton::clicked, this, &MusicController::mediaNext);
+    connect(this->prevBtn, &QPushButton::clicked, this, &MusicController::mediaPreviousSignal);
+    connect(this->nextBtn, &QPushButton::clicked, this, &MusicController::mediaNextSignal);
     connect(this->playBtn, &QPushButton::clicked, this, [=]()
     {
-        if(this->status == KU::PLUGIN::MediaStatus::Error)
+        if(this->status == MediaStatus::Error)
             return;
 
-        if(this->status == KU::PLUGIN::MediaStatus::Playing)
+        if(this->status == MediaStatus::Playing)
         {
-            this->statusChanged(KU::PLUGIN::MediaStatus::Paused);
-            emit mediaPause();
+            this->changeStatus(MediaStatus::Paused);
+            emit mediaPauseSignal();
         }
         else
         {
-            this->statusChanged(KU::PLUGIN::MediaStatus::Playing);
-            emit mediaPlay();
+            this->changeStatus(MediaStatus::Playing);
+            emit mediaPlaySignal();
         }
     });
 }
 
-void MusicController::trackChanged(KU::PLUGIN::MediaTrack const& track)
+void MusicController::changeTrack(MediaTrack const& track)
 {
     this->trackLabel->setText(track.title + "\n" +
                               track.artist + "\n");
@@ -61,31 +61,31 @@ void MusicController::trackChanged(KU::PLUGIN::MediaTrack const& track)
     this->positionSlider->setMaximum(track.duration);
 }
 
-void MusicController::nameChanged(QString const& name)
+void MusicController::changeName(QString const& name)
 {
 
 }
 
-void MusicController::positionChanged(quint32 position)
+void MusicController::changePosition(quint32 position)
 {
     this->positionSlider->setValue(position);
 }
 
-void MusicController::repeatChanged(KU::PLUGIN::MediaRepeat repeat)
+void MusicController::changeRepeat(MediaRepeat repeat)
 {
 
 }
 
-void MusicController::shuffleChanged(KU::PLUGIN::MediaShuffle shuffle)
+void MusicController::changeShuffle(MediaShuffle shuffle)
 {
 
 }
 
-void MusicController::statusChanged(KU::PLUGIN::MediaStatus status)
+void MusicController::changeStatus(MediaStatus status)
 {
     this->status = status;
 
-    if(status == KU::PLUGIN::MediaStatus::Playing)
+    if(status == MediaStatus::Playing)
         this->playBtn->setText("\uf28b");
     else
         this->playBtn->setText("\uf144");
