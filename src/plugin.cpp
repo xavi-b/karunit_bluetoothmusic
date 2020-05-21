@@ -27,7 +27,7 @@ QIcon KU_BluetoothMusic_Plugin::icon() const
 
 bool KU_BluetoothMusic_Plugin::initialize()
 {
-    if(QFontDatabase::addApplicationFont(":/FontAwesome") < 0)
+    if(QFontDatabase::addApplicationFont(":/karunit_bluetoothmusic/FontAwesome") < 0)
         qWarning() << "FontAwesome cannot be loaded !";
 
     this->musicControllerWidget = new MusicController;
