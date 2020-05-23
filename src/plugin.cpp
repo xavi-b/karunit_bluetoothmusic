@@ -73,6 +73,11 @@ QWidget* KU_BluetoothMusic_Plugin::createSettingsWidget()
     return nullptr;
 }
 
+QWidget* KU_BluetoothMusic_Plugin::createAboutWidget()
+{
+    return nullptr;
+}
+
 bool KU_BluetoothMusic_Plugin::loadSettings()
 {
     return true;
