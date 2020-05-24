@@ -5,7 +5,7 @@ MusicController::MusicController(QWidget* parent)
 {
     QVBoxLayout* layout = new QVBoxLayout;
 
-    this->setFont(QFont("FontAwesome"));
+    this->setFont(QFont("Font Awesome 5 Free"));
 
     this->trackLabel = new QLabel;
     this->trackLabel->setAlignment(Qt::AlignCenter);
