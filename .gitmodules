@@ -1,5 +1,0 @@
-[submodule "third-party/Font-Awesome"]
-	path = third-party/Font-Awesome
-	url = git@github.com:FortAwesome/Font-Awesome.git
-    branch = master
-    ignore = all
