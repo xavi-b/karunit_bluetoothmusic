@@ -5,6 +5,11 @@ QT             += widgets
 TARGET          = karunit_bluetoothmusic_plugin
 DESTDIR         = $$PWD/../karunit/app/plugins
 
+unix {
+target.path = /usr/local/bin/plugins
+INSTALLS += target
+}
+
 LIBS += -L$$PWD/../karunit/plugininterface/ -lkarunit_plugininterface
 INCLUDEPATH += $$PWD/../karunit/plugininterface
 
