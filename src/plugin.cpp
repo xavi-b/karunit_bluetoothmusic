@@ -22,7 +22,7 @@ QString KU_BluetoothMusic_Plugin::license() const
 
 QIcon KU_BluetoothMusic_Plugin::icon() const
 {
-    return QIcon();
+    return QIcon::fromTheme("multimedia-player");
 }
 
 bool KU_BluetoothMusic_Plugin::initialize()
