@@ -4,7 +4,10 @@ void KU_BluetoothMusic_PluginConnector::pluginSlot(QString const& signal, QVaria
 {
     if(signal == "trackChanged")
     {
-        //void trackChanged(MediaTrack const& track);
+        MediaTrack track;
+        track.title = data["title"].toString();
+        track.artist = data["artist"].toString();
+        emit trackChanged(track);
     }
 
     if(signal == "nameChanged")
@@ -14,7 +17,7 @@ void KU_BluetoothMusic_PluginConnector::pluginSlot(QString const& signal, QVaria
 
     if(signal == "positionChanged")
     {
-        //void positionChanged(quint32 position);
+        emit positionChanged(data["position"].toUInt());
     }
 
     if(signal == "repeatChanged")
@@ -29,7 +32,7 @@ void KU_BluetoothMusic_PluginConnector::pluginSlot(QString const& signal, QVaria
 
     if(signal == "statusChanged")
     {
-        //void statusChanged(MediaStatus status);
+        emit statusChanged((MediaStatus)data["status"].toInt());
     }
 }
 

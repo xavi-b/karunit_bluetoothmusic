@@ -1,6 +1,7 @@
 #ifndef BLUETOOTHMUSICCONNECTOR_H
 #define BLUETOOTHMUSICCONNECTOR_H
 
+#include <QVariantMap>
 #include "plugininterface.h"
 #include "mediadefines.h"
 
