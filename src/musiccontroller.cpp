@@ -5,8 +5,6 @@ MusicController::MusicController(QWidget* parent)
 {
     QVBoxLayout* layout = new QVBoxLayout;
 
-    this->setFont(QFont("Font Awesome 5 Free"));
-
     this->trackLabel = new QLabel;
     this->trackLabel->setAlignment(Qt::AlignCenter);
     layout->addWidget(this->trackLabel, 1);
@@ -14,13 +12,13 @@ MusicController::MusicController(QWidget* parent)
     QHBoxLayout* controlsLayout = new QHBoxLayout;
 
     controlsLayout->addStretch(1);
-    this->prevBtn = new QPushButton("\uf359");
+    this->prevBtn = new QPushButton(QIcon::fromTheme("media-skip-backward"), "");
     this->prevBtn->setFixedSize(50, 50);
     controlsLayout->addWidget(this->prevBtn);
-    this->playBtn = new QPushButton("\uf144");
+    this->playBtn = new QPushButton(QIcon::fromTheme("media-playback-start"), "");
     this->playBtn->setFixedSize(50, 50);
     controlsLayout->addWidget(this->playBtn);
-    this->nextBtn = new QPushButton("\uf35a");
+    this->nextBtn = new QPushButton(QIcon::fromTheme("media-skip-forward"), "");
     this->nextBtn->setFixedSize(50, 50);
     controlsLayout->addWidget(this->nextBtn);
     controlsLayout->addStretch(1);
@@ -86,7 +84,7 @@ void MusicController::changeStatus(MediaStatus status)
     this->status = status;
 
     if(status == MediaStatus::Playing)
-        this->playBtn->setText("\uf28b");
+        this->playBtn->setIcon(QIcon::fromTheme("media-playback-pause"));
     else
-        this->playBtn->setText("\uf144");
+        this->playBtn->setIcon(QIcon::fromTheme("media-playback-start"));
 }
