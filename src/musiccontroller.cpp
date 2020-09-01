@@ -27,6 +27,7 @@ MusicController::MusicController(QWidget* parent)
 
     this->positionSlider = new QSlider;
     this->positionSlider->setOrientation(Qt::Horizontal);
+    this->positionSlider->setDisabled(true);
     layout->addWidget(this->positionSlider);
 
     this->setLayout(layout);

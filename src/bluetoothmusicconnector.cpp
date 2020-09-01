@@ -7,6 +7,7 @@ void KU_BluetoothMusic_PluginConnector::pluginSlot(QString const& signal, QVaria
         MediaTrack track;
         track.title = data["title"].toString();
         track.artist = data["artist"].toString();
+        track.duration = data["duration"].toUInt();
         emit trackChanged(track);
     }
 
