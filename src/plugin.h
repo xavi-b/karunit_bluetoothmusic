@@ -19,6 +19,8 @@ class KU_BluetoothMusic_Plugin : public QObject, public KU::PLUGIN::PluginInterf
     Q_INTERFACES(KU::PLUGIN::PluginInterface)
 
 public:
+    KU_BluetoothMusic_Plugin();
+    ~KU_BluetoothMusic_Plugin();
     virtual QString name() const override;
     virtual QString id() const override;
     virtual KU::PLUGIN::PluginVersion version() const override;

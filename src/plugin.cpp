@@ -1,5 +1,17 @@
 #include "plugin.h"
 
+KU_BluetoothMusic_Plugin::KU_BluetoothMusic_Plugin()
+{
+    this->pluginConnector = new KU_BluetoothMusic_PluginConnector;
+    this->setPluginConnector(this->pluginConnector);
+}
+
+KU_BluetoothMusic_Plugin::~KU_BluetoothMusic_Plugin()
+{
+    if(this->pluginConnector != nullptr)
+        delete this->pluginConnector;
+}
+
 QString KU_BluetoothMusic_Plugin::name() const
 {
     return "BT Music";
@@ -28,9 +40,6 @@ QIcon KU_BluetoothMusic_Plugin::icon() const
 bool KU_BluetoothMusic_Plugin::initialize()
 {
     this->musicControllerWidget = new MusicController;
-
-    this->pluginConnector = new KU_BluetoothMusic_PluginConnector;
-    this->setPluginConnector(this->pluginConnector);
 
     QObject::connect(this->pluginConnector, &KU_BluetoothMusic_PluginConnector::trackChanged,
                      this->musicControllerWidget, &MusicController::changeTrack);
