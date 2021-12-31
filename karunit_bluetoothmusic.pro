@@ -1,7 +1,7 @@
 TEMPLATE        = lib
 CONFIG         += plugin c++17
 DEFINES        += QT_DEPRECATED_WARNINGS
-QT             += widgets
+QT             += quick
 TARGET          = karunit_bluetoothmusic_plugin
 DESTDIR         = $$PWD/../karunit/app/plugins
 
@@ -23,3 +23,6 @@ SUBDIRS += \
     src/
 
 include(src/src.pri)
+
+RESOURCES += \
+    karunit_bluetoothmusic.qrc

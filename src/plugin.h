@@ -4,12 +4,10 @@
 #include <QtPlugin>
 #include <QIcon>
 #include <QDebug>
-#include <QLabel>
 #include <QDateTime>
 #include <QFontDatabase>
 #include "plugininterface.h"
 #include "settings.h"
-#include "musiccontroller.h"
 #include "bluetoothmusicconnector.h"
 
 class KU_BluetoothMusic_Plugin : public QObject, public KU::PLUGIN::PluginInterface
@@ -19,26 +17,17 @@ class KU_BluetoothMusic_Plugin : public QObject, public KU::PLUGIN::PluginInterf
     Q_INTERFACES(KU::PLUGIN::PluginInterface)
 
 public:
-    KU_BluetoothMusic_Plugin();
-    ~KU_BluetoothMusic_Plugin();
-    virtual QString name() const override;
-    virtual QString id() const override;
+    virtual QString                   name() const override;
+    virtual QString                   id() const override;
     virtual KU::PLUGIN::PluginVersion version() const override;
-    virtual QString license() const override;
-    virtual QIcon icon() const override;
-    virtual bool initialize() override;
-    virtual bool stop() override;
+    virtual QString                   license() const override;
+    virtual QString                   icon() const override;
+    virtual bool                      initialize() override;
+    virtual bool                      stop() override;
 
-    virtual QWidget* createWidget() override;
-    virtual QWidget* createSettingsWidget() override;
-    virtual QWidget* createAboutWidget() override;
-    virtual bool loadSettings() override;
-    virtual bool saveSettings() const override;
-
-private:
-    MusicController* musicControllerWidget = nullptr;
-    KU_BluetoothMusic_PluginConnector* pluginConnector = nullptr;
+    virtual bool                               loadSettings() override;
+    virtual bool                               saveSettings() const override;
+    virtual KU_BluetoothMusic_PluginConnector* getPluginConnector() override;
 };
-
 
 #endif // BLUETOOTHMUSICPLUGIN_H

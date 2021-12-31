@@ -31,7 +31,7 @@ enum MediaShuffle
 
 enum MediaStatus
 {
-    Playing,
+    Playing = 0,
     Stopped,
     Paused,
     ForwardSeek,
@@ -43,7 +43,7 @@ struct DeviceInfo
 {
     QString name;
     QString address;
-    bool connected = false;
+    bool    connected = false;
 };
 
 #endif // MEDIADEFINES_H

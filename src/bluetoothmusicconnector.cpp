@@ -2,57 +2,57 @@
 
 void KU_BluetoothMusic_PluginConnector::pluginSlot(QString const& signal, QVariantMap const& data)
 {
-    if(signal == "trackChanged")
+    if (signal == "trackChanged")
     {
-        MediaTrack track;
-        track.title = data["title"].toString();
-        track.artist = data["artist"].toString();
-        track.duration = data["duration"].toUInt();
-        emit trackChanged(track);
+        this->track    = data["title"].toString() + "\n" + data["artist"].toString();
+        this->duration = data["duration"].toUInt();
+        emit trackChanged();
     }
 
-    if(signal == "nameChanged")
+    if (signal == "nameChanged")
     {
-        //void nameChanged(QString const& name);
+        // void nameChanged(QString const& name);
     }
 
-    if(signal == "positionChanged")
+    if (signal == "positionChanged")
     {
-        emit positionChanged(data["position"].toUInt());
+        this->position = data["position"].toUInt();
+        emit positionChanged();
     }
 
-    if(signal == "repeatChanged")
+    if (signal == "repeatChanged")
     {
-        //void repeatChanged(MediaRepeat repeat);
+        // void repeatChanged(MediaRepeat repeat);
     }
 
-    if(signal == "shuffleChanged")
+    if (signal == "shuffleChanged")
     {
-        //void shuffleChanged(MediaShuffle shuffle);
+        // void shuffleChanged(MediaShuffle shuffle);
     }
 
-    if(signal == "statusChanged")
+    if (signal == "statusChanged")
     {
-        emit statusChanged((MediaStatus)data["status"].toInt());
+        this->status = (MediaStatus)data["status"].toInt();
+        emit statusChanged();
     }
 }
 
-void KU_BluetoothMusic_PluginConnector::mediaPreviousSlot()
+void KU_BluetoothMusic_PluginConnector::mediaPrevious()
 {
     this->pluginSignal("mediaPrevious");
 }
 
-void KU_BluetoothMusic_PluginConnector::mediaNextSlot()
+void KU_BluetoothMusic_PluginConnector::mediaNext()
 {
     this->pluginSignal("mediaNext");
 }
 
-void KU_BluetoothMusic_PluginConnector::mediaPlaySlot()
+void KU_BluetoothMusic_PluginConnector::mediaPlay()
 {
     this->pluginSignal("mediaPlay");
 }
 
-void KU_BluetoothMusic_PluginConnector::mediaPauseSlot()
+void KU_BluetoothMusic_PluginConnector::mediaPause()
 {
     this->pluginSignal("mediaPause");
 }
